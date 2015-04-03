@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <link data-require="bootstrap@*" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link href='http://fonts.googleapis.com/css?family=Candal|Roboto+Condensed|Roboto' rel='stylesheet' type='text/css'>  
+  <script data-require="angular.js@*" data-semver="1.4.0-beta.6" src="https://code.angularjs.org/1.2.1/angular.js"></script>
+  <script data-require="jquery@2.1.3" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script data-require="bootstrap@*" data-semver="3.3.2" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body ng-app>
+  <div ng-controller="DeadEmpireCtrl">
+    <div class="container game-div">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="collapse" id="collapseInfo">
+            <p>Welcome Survivor X! Your reputation precedes you. We need your help. We pay $1 for every zombie you kill. Any supplies you find are yours to keep or sell. With your reputation, I'm sure you can hire other survivors to join you. For more info,
+              check out <a href="guide.html">The Guide</a>. Be safe out there!
+            </p>
+          </div>
+          <div class="logo">
+            <p class="font-effect-crackle">DEAD EMPIRE<span></span></p>
+            <input id="infoBtn" value="Info" class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseInfo" aria-expanded="false" aria-controls="collapseExample" />
+          </div>
+          <h1 class="num-money">${{numMoney | number: 0}}</h1>
+          <p class="stat-p">SUP: {{numSupplies
+            < 0 ? '0' : numSupplies | number: 0}} / {{numSuppliesMax | number: 0}} cap</p>
+
+              <p class="stat-p">TK: {{numTotalKills | number: 0}} ({{(crewKillRatePS + vetCrewKillRatePS + bossesKillRatePS) * 100 | number: 1}} kps)</p>
+              <button ng-click="killZombie()" class="btn btn-danger btn-block btn-pad-15 bbg1" style="margin: 10px 0 10px 0;" id="btnKillZombie"><span class="glyphicon glyphicon-screenshot"></span>&nbsp Kill Zombies&nbsp({{numPersonalKills | number: 0}})</button>
+              <div class="col-xs-6" style="text-align: center; padding: 0 4px 0 0; z-index: 2;">
+                <button ng-click="scavenge()" ng-disabled="numSupplies >= numSuppliesMax" class="btn btn-primary btn-block btn-pad-15 btn-marg-10 bbg2" id="btnScavenge"><span class="glyphicon glyphicon-refresh"></span>&nbsp Scavenge (x{{scavengeSuppliesInc | number: 1}})</button>
+                <p class="section-p">HIRE</p>
+                <button ng-click="hireCrew()" ng-disabled="crewCost > numMoney" class="btn btn-success btn-block btn-reg bbg1" id="btnHireCrew">Crew ({{numCrew}})
+                  <br/>${{crewCost}} ({{crewKillRatePS * 100 | number: 0}} kps)</button>
+                <button ng-click="hireVetCrew()" ng-disabled="vetCrewCost > numMoney" class="btn btn-success btn-block btn-reg bbg3" id="btnHireVetCrew">Veteran Crew ({{numVetCrew}})
+                  <br/>${{vetCrewCost}} ({{vetCrewKillRatePS * 100 | number: 0}} kps)</button>
+                <button ng-click="hireBoss()" ng-disabled="bossCost > numMoney" class="btn btn-success btn-block btn-reg bbg1" id="btnHireBoss">Boss ({{numBosses}})
+                  <br/>${{bossCost}} ({{bossesKillRatePS * 100 | number: 0}} kps)</button>
+              </div>
+              <div class="col-xs-6" style="text-align: center; padding: 0 0 0 4px; z-index: 2;">
+                <button ng-click="sellSupplies()" ng-disabled="numSupplies < 1" class="btn btn-primary btn-block btn-pad-15 btn-marg-10 bbg1" id="btnSellSupplies"><span class="glyphicon glyphicon-usd"></span>&nbsp Sell (x{{sellSuppliesInc | number: 1}})</button>
+                <p class="section-p">BUILD</p>
+                <button ng-click="buildCache()" ng-disabled="cacheCost > numMoney" class="btn btn-warning btn-block btn-reg btn-build bbg2" id="btnBuildCache">Cache ({{numCaches}})
+                  <br/>${{cacheCost}} (+{{cacheCap | number: 0}} cap)</button>
+                <button ng-click="buildVehicle()" ng-disabled="vehicleCost > numMoney" class="btn btn-warning btn-block btn-reg btn-build bbg1" id="btnBuildVehicle">Vehicle ({{numVehicles}})
+                  <br/>${{vehicleCost}} (+{{vehicleCap | number: 0}} cap)</button>
+                <button ng-click="buildBase()" ng-disabled="baseCost > numMoney" class="btn btn-warning btn-block btn-reg btn-build bbg3" id="btnBuildBase">Base ({{numBases}})
+                  <br/>${{baseCost}} (+{{baseCap | number: 0}} cap)</button>
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img src="http://i.imgur.com/S0vDcdt.png" class="fix-bottom" style="display: block; margin: 0 auto;" />
+  <!-- <img src="http://i.imgur.com/VUmGfDX.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->  
+  <script>
+    // Toggle Info button text
+    $('#infoBtn').click(function() {
+      $(this).val() == "Info" ? hide() : info();
+    });
+    function hide() {
+      $('#infoBtn').val('Hide');
+    }
+    function info() {
+      $('#infoBtn').val('Info');
+    }
+     // Adjust gradient based on time of day
+    var today = (new Date()).getHours();
+    if ((today >= 5 && today <= 9) || (today >= 16 && today <= 19)) {
+      // Dusky
+      $('body').addClass('skygrad2');
+    } else if (today >= 10 && today <= 15) {
+      // Lighter
+      $('body').addClass('skygrad1');
+    } else {
+      // Darker
+      $('body').addClass('skygrad3');
+    }
+  </script>
+</body>
+
+</html>
+
