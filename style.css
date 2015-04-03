@@ -64,6 +64,12 @@ p {
 .btn-build {
   background-color: #67747E !important;
 }
+.btn {
+  -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 .fix-bottom {
   position: fixed;
   bottom: 0;
