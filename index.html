@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <link data-require="bootstrap@*" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
   <link rel="stylesheet" href="style.css" />
-  <link href='http://fonts.googleapis.com/css?family=Candal|Roboto+Condensed|Roboto' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Candal|Roboto+Condensed|Roboto' rel='stylesheet' type='text/css'>  
   <script data-require="angular.js@*" data-semver="1.4.0-beta.6" src="https://code.angularjs.org/1.2.1/angular.js"></script>
   <script data-require="jquery@2.1.3" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script data-require="bootstrap@*" data-semver="3.3.2" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -28,16 +28,15 @@
             </p>
           </div>
           <div class="logo">
-            <p class="font-effect-crackle">DEAD EMPIRE<span></span>
-            </p>
+            <p class="font-effect-crackle">DEAD EMPIRE<span></span></p>
             <input id="infoBtn" value="Info" class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseInfo" aria-expanded="false" aria-controls="collapseExample" />
           </div>
           <h1 class="num-money">${{numMoney | number: 0}}</h1>
-          <p class="stat-p">SUP: {{numSupplies
+          <p class="stat-p">Supplies: {{numSupplies
             < 0 ? '0' : numSupplies | number: 0}} / {{numSuppliesMax | number: 0}} cap</p>
 
-              <p class="stat-p">TK: {{numTotalKills | number: 0}} ({{(crewKillRatePS + vetCrewKillRatePS + bossesKillRatePS) * 100 | number: 1}} kps)</p>
-              <button ng-click="killZombie()" class="btn btn-danger btn-block btn-pad-15 bbg1" style="margin: 10px 0 10px 0;" id="btnKillZombie"><span class="glyphicon glyphicon-screenshot"></span>&nbsp Kill Zombies&nbsp({{numPersonalKills | number: 0}})</button>
+              <p class="stat-p">Total Kills: {{numTotalKills | number: 0}} ({{(crewKillRatePS + vetCrewKillRatePS + bossesKillRatePS) * 100 | number: 1}} kps)</p>
+              <button ng-click="killZombie()" class="btn btn-danger btn-block btn-pad-15" style="margin: 10px 0 10px 0;" id="btnKillZombie"><span class="glyphicon glyphicon-screenshot"></span>&nbsp Kill Zombies&nbsp({{numPersonalKills | number: 0}})</button>
               <div class="col-xs-6" style="text-align: center; padding: 0 4px 0 0; z-index: 2;">
                 <button ng-click="scavenge()" ng-disabled="numSupplies >= numSuppliesMax" class="btn btn-primary btn-block btn-pad-15 btn-marg-10 bbg2" id="btnScavenge"><span class="glyphicon glyphicon-refresh"></span>&nbsp Scavenge (x{{scavengeSuppliesInc | number: 1}})</button>
                 <p class="section-p">HIRE</p>
@@ -62,18 +61,32 @@
       </div>
     </div>
   </div>
-  <img src="http://i.imgur.com/S0vDcdt.png" class="fix-bottom" style="display: block; margin: 0 auto;" />
-  <!-- <img src="http://i.imgur.com/VUmGfDX.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->
+  <!-- <img src="http://i.imgur.com/S0vDcdt.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->
+  <!-- <img src="http://i.imgur.com/VUmGfDX.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->  
   <script>
-     // Toggle Info button text
+  // Disable selection
+  $(function(){
+    $.extend($.fn.disableTextSelect = function() {
+        return this.each(function(){
+            if($.browser.mozilla){//Firefox
+                $(this).css('MozUserSelect','none');
+            }else if($.browser.msie){//IE
+                $(this).bind('selectstart',function(){return false;});
+            }else{//Opera, etc.
+                $(this).mousedown(function(){return false;});
+            }
+        });
+    });
+    $('.btn').disableTextSelect();//No text selection on elements with a class of 'noSelect'
+});
+  
+    // Toggle Info button text
     $('#infoBtn').click(function() {
       $(this).val() == "Info" ? hide() : info();
     });
-
     function hide() {
       $('#infoBtn').val('Hide');
     }
-
     function info() {
       $('#infoBtn').val('Info');
     }
@@ -81,15 +94,16 @@
     var today = (new Date()).getHours();
     if ((today >= 5 && today <= 9) || (today >= 16 && today <= 19)) {
       // Dusky
-      $('body').addClass('skygrad2');
+      //$('body').addClass('skygrad2');
     } else if (today >= 10 && today <= 15) {
       // Lighter
-      $('body').addClass('skygrad1');
+      //$('body').addClass('skygrad1');
     } else {
       // Darker
-      $('body').addClass('skygrad3');
+      //$('body').addClass('skygrad3');
     }
   </script>
 </body>
 
 </html>
+
