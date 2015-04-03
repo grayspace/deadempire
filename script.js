@@ -1,7 +1,7 @@
 function DeadEmpireCtrl($scope, $interval) {
   // Define variables & set starting values   
   // For main stats
-  $scope.numMoney = 300;
+  $scope.numMoney = 0;
   $scope.numSupplies = 0;
   $scope.numSuppliesMax = 50;
   $scope.scavengeSuppliesInc = 1;
