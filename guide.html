@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+  <link data-require="bootstrap@*" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+<!--   <script data-require="angular.js@*" data-semver="1.4.0-beta.6" src="https://code.angularjs.org/1.2.1/angular.js"></script> -->
+  <script data-require="jquery@2.1.3" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script data-require="bootstrap@*" data-semver="3.3.2" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background-color: #2B222C;">
+  <div ng-controller="NavCtrl">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style="min-height: 800px;">
+          <a style="margin-bottom: 10px;" class="btn btn-default btn-sm" type="button" href="index.html">Back to Game</a>
+          <p>So you're the one they call "Survivor X"? Well, good to meet you. I'm Sargious. I'm in charge of the Extermination teams here at the CDC. Here are some questions most people ask when they start out. Oh, and take this radio. We'll keep in touch.
+            Now let's see if everything they say about you is true!</p>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <!-- What am I supposed to do? -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          What am I supposed to do?
+        </a>
+      </h4>
+              </div>
+              <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                  Kill zombies, of course! Our best data shows that 85% of the population are infected. What's left of the government can't handle the workload, so we're hiring hardy survivors like you to help us clean things up. We can't offer you any gear or supplies,
+                  but you are authorized to scavenge any abandoned buildings or vehicles you find out there. It's people like you who will help us stop the spread, and save humanity!
+                </div>
+              </div>
+            </div>
+            <!-- How many zombies have I killed? -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          How can I tell how many zombies I've killed?
+        </a>
+      </h4>
+              </div>
+              <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="panel-body">
+                  No notches on a belt here. We keep track of everything so you get paid. Your personal kill count is shown on the red "Kill Zombies" button. Just above that button you'll see your total kills (TK), which includes any kills by your organization. To the
+                  right of TK is the number killed per second by your organization.
+                </div>
+              </div>
+            </div>
+            <!-- Tell me about Scavenging & Selling -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingThree">
+                <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Tell me about scavenging & selling.
+        </a>
+      </h4>
+              </div>
+              <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                <div class="panel-body">
+                  Every time you scavenge & sell supplies, you get a little better at it. The numbers on the blue buttons show how many supplies you move when you scavenge or sell. Where it really gets interesting is when you start hiring crews & bosses. Not only
+                  do crews kill zombies for you, they scavenge for supplies. Bosses find potential buyers & sell supplies to them for you. Just below your money counter at the top of the screen, you'll see your supply counter (SUP) followed by your current
+                  capacity. To increase supply capacity, you need to build caches, vehicles & bases.
+                </div>
+              </div>
+            </div>
+            <!-- What's the difference between Crews, Veteran Crews & Bosses? -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFour">
+                <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          What's the difference between Crews, Veteran Crews & Bosses?
+        </a>
+      </h4>
+              </div>
+              <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                <div class="panel-body">
+                  Each Crew is made up of 5 tough surviors that are good at killing zombies, scavenging, and well, surviving. Veteran Crews are more experienced, killing twice as many zombies & collecting twice as many supplies as regular Crews. Bosses are basically total
+                  apocalyptic badasses. They kill the same number as Veteran Crews, all by themselves. In addition, they are the only unit that can sell supplies for you.
+                </div>
+              </div>
+            </div>
+            <!-- Tell me about building. -->
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="headingFive">
+                <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          What about Caches, Vehicles & Bases?
+        </a>
+      </h4>
+              </div>
+              <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                <div class="panel-body">
+                  Building is an important part of growing your organization. Caches, Vehicles & Bases all increase your supply capacity. With your crews out there scavenging non-stop, you'll want to be sure you have enough storage to hang on to your valuable supplies.
+                  In addition, Vehicles & Bases increase the rate at which you can scavenge & sell supplies.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
