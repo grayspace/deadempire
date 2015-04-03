@@ -65,26 +65,6 @@
   <img src="http://i.imgur.com/S0vDcdt.png" class="fix-bottom" style="display: block; margin: 0 auto;" />
   <!-- <img src="http://i.imgur.com/VUmGfDX.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->
   <script>
-    // Disable selection
-    $(function() {
-      $.extend($.fn.disableTextSelect = function() {
-        return this.each(function() {
-          if ($.browser.mozilla) { //Firefox
-            $(this).css('MozUserSelect', 'none');
-          } else if ($.browser.msie) { //IE
-            $(this).bind('selectstart', function() {
-              return false;
-            });
-          } else { //Opera, etc.
-            $(this).mousedown(function() {
-              return false;
-            });
-          }
-        });
-      });
-      $('body').disableTextSelect(); //No text selection on elements with a class of 'noSelect'
-    });
-
      // Toggle Info button text
     $('#infoBtn').click(function() {
       $(this).val() == "Info" ? hide() : info();
