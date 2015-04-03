@@ -64,7 +64,7 @@
   <!-- <img src="http://i.imgur.com/VUmGfDX.png" class="fix-bottom" style="display: block; margin: 0 auto;" /> -->  
   <script>
     // Disable Content Selection
-    $("body").disableSelection();
+    $('body').mousedown(function(e){ e.preventDefault(); })
     // Toggle Info button text
     $('#infoBtn').click(function() {
       $(this).val() == "Info" ? hide() : info();
