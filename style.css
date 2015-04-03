@@ -9,6 +9,10 @@ body {
   margin: 0;
   padding-top: 10px;
   height: 100%;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 h1,
 h2,
@@ -63,12 +67,6 @@ p {
 }
 .btn-build {
   background-color: #67747E !important;
-}
-.btn {
-  -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 .fix-bottom {
   position: fixed;
